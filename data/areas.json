@@ -4,5 +4,14 @@
     "name": "備中",
     "lat": 34.712,
     "lng": 133.616
+  },
+  {
+    "id": "komoridani",
+    "name": "蝙蝠谷",
+    "lat": 34.712,
+    "lng": 133.616,
+    "approach": "unchihogehoge",
+    "description": "unchi",
+    "blogs": "hogehogeunchi"
   }
 ]
