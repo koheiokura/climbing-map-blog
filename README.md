@@ -5,7 +5,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
-npm run dev
+npm run dev     # これでブラウザ上で動作確認可能
+npm run build   # これでローカルでビルド
 # or
 yarn dev
 # or

@@ -24,3 +24,16 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 地図が正しく表示されるための強制設定 */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* 画像が消えるのを防ぐ（Tailwind等との競合対策） */
+.leaflet-container img {
+  max-width: none !important;
+  max-height: none !important;
+}
