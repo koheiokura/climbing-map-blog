@@ -1,4 +1,4 @@
-import areas from "../../../data/areas.json";
+import areas from "../../data/areas.json";
 
 export default function AreaPage({ params }) {
   const area = areas.find(a => a.id === params.id);
