@@ -2,16 +2,35 @@
   {
     "id": "bitchu",
     "name": "備中",
-    "lat": 34.712,
-    "lng": 133.616
+    "lat": 34.719,
+    "lng": 133.616,
+    "tags": ["中級者", "展望", "許可証"]
   },
   {
     "id": "komoridani",
     "name": "蝙蝠谷",
     "lat": 34.712,
     "lng": 133.616,
-    "approach": "unchihogehoge",
-    "description": "unchi",
-    "blogs": "hogehogeunchi"
+    "tags": ["中級者", "展望", "許可証"],
+    "details": {
+      "parking": { "name": "有料駐車場", "capacity": "約16台", "price": "500円", "rules": "アイドリング禁止" },
+      "approach": [
+        { "step": 1, "title": "駅から登山口へ", "instruction": "hogeを渡らずに線路沿いを進みます。", "image360": "/images/fudoiwa/step1.jpg" }
+      ]
+    }
+  },
+  {
+    "id": "fudoiwa",
+    "name": "不動岩",
+    "lat": 34.852,
+    "lng": 135.221,
+    "tags": ["初心者", "展望"],
+    "desc": "道場駅から徒歩圏内の人気エリア。見晴らしが良い。",
+    "details": {
+      "parking": { "name": "道場駅前駐車場", "capacity": "約10台", "price": "500円", "rules": "アイドリング禁止" },
+      "approach": [
+        { "step": 1, "title": "駅から登山口へ", "instruction": "右手に進み、踏切を渡らずに線路沿いを進みます。", "image360": "/images/fudoiwa/step1.jpg" }
+      ]
+    }
   }
 ]

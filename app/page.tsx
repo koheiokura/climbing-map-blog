@@ -3,77 +3,14 @@
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import DetailDrawer from '@/components/DetailDrawer'; // 今作った部品を読み込む
+import areasData from '@/data/areas.json';
 
 const Map = dynamic(() => import('@/components/Map'), { 
   ssr: false,
   loading: () => <div className="h-full w-full bg-gray-100 flex items-center justify-center">地図をロード中...</div>
 });
 
-const CLIMBING_AREAS = [
-  {
-    id: 'fudoiwa',
-    name: "不動岩",
-    lat: 34.852,
-    lng: 135.221,
-    tags: ["初心者", "展望", "駅近"],
-    desc: "道場駅から徒歩圏内の人気エリア。見晴らしが良い。",
-    // --- ここから詳細データ ---
-    details: {
-      parking: {
-        name: "道場駅前駐車場",
-        capacity: "約10台",
-        price: "1日500円",
-        rules: "早朝のアイドリング禁止"
-      },
-      approach: [
-        {
-          step: 1,
-          title: "駅から登山口へ",
-          instruction: "道場駅を出て右手に進み、踏切を渡らずに線路沿いを進みます。",
-          image360: "/images/fudoiwa/step1_360.jpg" // ここにパノラマ写真のパス
-        },
-        {
-          step: 2,
-          title: "トンネルを抜ける",
-          instruction: "高速道路の高架下を潜り、トンネルの手前を左に曲がります。",
-          image360: "/images/fudoiwa/step2_360.jpg"
-        }
-      ],
-      routes: [
-        { name: "正面壁 5.10a", grade: "5.10a" },
-        { name: "シアター 5.12a", grade: "5.12a" } // ターゲットグレードの情報を含める
-      ]
-    }
-  },
-  {
-    id: 'komoridani',
-    name: "蝙蝠谷",
-    lat: 34.885,
-    lng: 135.255,
-    tags: ["中上級", "石灰岩", "夏場OK"],
-    desc: "静かな森の中にあるエリア。夏場でも比較的涼しい。",
-    details: {
-      parking: {
-        name: "蝙蝠谷専用スペース",
-        capacity: "5-6台",
-        price: "無料",
-        rules: "指定場所以外の駐車厳禁。奥から詰めて駐車すること"
-      },
-      approach: [
-        {
-          step: 1,
-          title: "入渓ポイント",
-          instruction: "林道終点から川へ降りるポイントです。増水時は注意。",
-          image360: "/images/komoridani/step1_360.jpg"
-        }
-      ],
-      routes: [
-        { name: "カサブランカ 5.10a", grade: "5.10a" },
-        { name: "マーメイド 5.12b", grade: "5.12b" }
-      ]
-    }
-  }
-];
+const CLIMBING_AREAS = areasData;
 
 export default function Page() {
   const [selectedArea, setSelectedArea] = useState(CLIMBING_AREAS[0]);
