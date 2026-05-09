@@ -4,16 +4,31 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { LatLngExpression } from 'leaflet';
 import { useEffect, useState } from "react";
-// L を直接 import するのではなく、動的に扱うための工夫
 import L from 'leaflet';
 
+// 修正：タイミングのズレを解消するコンポーネント
 function ChangeView({ center }: { center: LatLngExpression }) {
   const map = useMap();
+
   useEffect(() => {
-    map.setView(center, 13);
-    // 地図が真っ白になるのを防ぐため、サイズを再計算させる
-    map.invalidateSize();
+    if (!map || !center) return;
+
+    // 地図が準備完了（Ready）になってから実行する
+    map.whenReady(() => {
+      try {
+        // centerが有効な値かチェックして移動
+        map.setView(center, 13, { animate: true });
+        
+        // 少し遅らせてサイズ再計算を実行（白画面防止）
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 100);
+      } catch (e) {
+        console.error("Map movement error:", e);
+      }
+    });
   }, [center, map]);
+
   return null;
 }
 
@@ -26,18 +41,19 @@ export default function Map({ center, areas }: MapProps) {
   const [icon, setIcon] = useState<L.Icon | null>(null);
 
   useEffect(() => {
-    // アイコンの設定をブラウザ実行時に限定する
-    const defaultIcon = L.icon({
-      iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-      shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-    });
-    setIcon(defaultIcon);
+    if (typeof window !== "undefined") {
+      const defaultIcon = L.icon({
+        iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+        shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+      });
+      setIcon(defaultIcon);
+    }
   }, []);
 
   return (
-    <div style={{ height: "100%", width: "100%", backgroundColor: "#e5e7eb" }}>
+    <div className="h-full w-full bg-gray-200">
       <MapContainer
         center={center}
         zoom={10}
@@ -45,7 +61,7 @@ export default function Map({ center, areas }: MapProps) {
       >
         <ChangeView center={center} />
         <TileLayer
-          attribution='&copy; OpenStreetMap contributors'
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {icon && areas.map((area) => (
