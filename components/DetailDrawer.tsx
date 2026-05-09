@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import PanoramaViewer from "./PanoramaViewer"; // 追加
+// import PanoramaViewer from "./PanoramaViewer"; // 追加
 
 interface DetailDrawerProps {
   isOpen: boolean;
