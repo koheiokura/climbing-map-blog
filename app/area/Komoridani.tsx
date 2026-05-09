@@ -21,7 +21,7 @@ export default function AreaPage({ params }: Props) {
   return (
     <div>
       <h1>{area.name}</h1>
-      <p>{area.description}</p>
+      <p>{area.desc}</p>
       {/* ...以下省略 */}
     </div>
   );
