@@ -57,6 +57,9 @@ export default function Map({ center, areas }: MapProps) {
       <MapContainer
         center={center}
         zoom={10}
+        zoomSnap={0.1}     // ズームを止めた時に0.1刻みで吸着（デフォルトは1.0）
+        zoomDelta={0.5}    // ズームボタン等での移動幅
+        wheelPxPerZoomLevel={120} // スクロールでのズーム感度
         style={{ height: "100%", width: "100%" }}
       >
         <ChangeView center={center} />
